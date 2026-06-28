@@ -10,9 +10,10 @@ import { connectDB, db } from './server/db.js';
 import { authController, authenticateJWT, AuthenticatedRequest } from './server/auth.js';
 import { generateSessionPlan, evaluatePracticeSpeech, generateStoryAndAnalogy, evaluateQAResponse, analyzeSlides, detectKnowledgeGap } from './server/ai.js';
 
-async function startServer() {
-  const app = express();
-  const PORT = 3000;
+export const app = express();
+
+export async function initApp() {
+  const PORT = process.env.PORT || 3000;
 
   // Initialize Database (MongoDB Atlas Mongoose or JSON file-based fallback)
   await connectDB();
@@ -591,9 +592,13 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`SpeakWise AI custom server listening on port ${PORT}`);
-  });
+  if (process.env.VERCEL !== '1' && process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`SpeakWise AI custom server listening on port ${PORT}`);
+    });
+  }
 }
 
-startServer();
+if (process.env.VERCEL !== '1') {
+  initApp();
+}
