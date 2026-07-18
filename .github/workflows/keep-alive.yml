@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Send a query to Supabase database
         run: |
-          curl -i -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/users?select=*&limit=1" \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
+          curl -i -X GET "https://cgsuffxibjjiauekoxft.supabase.co/rest/v1/users?select=*&limit=1" \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnc3VmZnhpYmpqaWF1ZWtveGZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2ODc0MDMsImV4cCI6MjA5OTI2MzQwM30.ncSZnaevy-dVxqCeW86OTXYhFGNRpouKyEIz0o4LnR4" \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnc3VmZnhpYmpqaWF1ZWtveGZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2ODc0MDMsImV4cCI6MjA5OTI2MzQwM30.ncSZnaevy-dVxqCeW86OTXYhFGNRpouKyEIz0o4LnR4"
