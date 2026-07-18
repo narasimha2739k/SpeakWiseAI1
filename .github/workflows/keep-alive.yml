@@ -1,0 +1,17 @@
+name: Keep Supabase Active
+
+on:
+  schedule:
+    # Run every Monday and Thursday at 12:00 UTC (noon)
+    - cron: '0 12 * * 1,4'
+  workflow_dispatch: # Allows running manually from the GitHub UI
+
+jobs:
+  ping_db:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send a query to Supabase database
+        run: |
+          curl -i -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/users?select=*&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
